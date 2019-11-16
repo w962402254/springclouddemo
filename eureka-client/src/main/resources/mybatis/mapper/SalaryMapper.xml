@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.eurekaclient.dao.SalaryMapper">
+
+    <select id="selectSalary" resultType="map">
+            SELECT
+    	t_sal_exceldata.staffName,
+    	t_sal_exceldata.IDCard,
+    	w_sal_bank_slip.bankcardNo,
+    	t_sal_exceldata.salaryDate,
+    	t_sal_exceldata.salaryPayCount,
+    	t_sal_exceldata.salaryPayable,
+    	t_sal_exceldata.personEndowment,
+    	t_sal_exceldata.personMedical,
+    	t_sal_exceldata.personUnemploye,
+    	t_sal_exceldata.personInjury,
+    	t_sal_exceldata.personBirth,
+    	t_sal_exceldata.personHousefund,
+    	t_sal_exceldata.personIncomeTax,
+    	t_sal_exceldata.salaryNetIncome,
+    	t_sal_exceldata.otherAmount,
+    	t_sal_exceldata.personUnionFee,
+    	t_sal_exceldata.personSecurityAdjust,
+    	t_sal_exceldata.personHousefundAdjust,
+    	salaryExcelData
+    FROM
+    	t_sal_exceldata,
+    	w_sal_bank_slip,
+    	b_sys_pro,
+    	b_sys_pro_wx
+    WHERE
+    	t_sal_exceldata.IDCard = #{IDCard,jdbcType=VARCHAR}
+    	AND t_sal_exceldata.salaryDate = #{salaryDate,jdbcType=VARCHAR}
+    	AND t_sal_exceldata.state = 2
+    	AND t_sal_exceldata.salaryTempId = w_sal_bank_slip.salaryTempId
+    	AND EXISTS ( SELECT salaryBillId FROM `newinterface`.biz_payment_summary WHERE t_sal_exceldata.salaryBillId = salaryBillId AND feedbackApplyState = 1 )
+    	AND t_sal_exceldata.proId = b_sys_pro_wx.proId
+    	AND t_sal_exceldata.proId = b_sys_pro.proId
+    ORDER BY
+    	salaryPayable DESC
+    </select>
+
+    <select id="getSalaryEX" resultType="map" parameterType="string">
+		select typeMappingId,excelItemName,calculateType from b_sal_typemapping
+		<where>
+			<if test="salaryExcelData != null and salaryExcelData != ''">
+				typeMappingId in (${salaryExcelData})
+			</if>
+		</where>
+	</select>
+</mapper>

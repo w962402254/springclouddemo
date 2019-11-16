@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.eurekaclient.dao.BPerStaffMapper">
+  <resultMap id="BaseResultMap" type="com.example.eurekaclient.bean.BPerStaff">
+    <!--@mbg.generated generated on Tue Oct 08 21:04:29 CST 2019.-->
+    <result column="staffId" jdbcType="INTEGER" property="staffId" />
+    <result column="staffNo" jdbcType="VARCHAR" property="staffNo" />
+    <result column="IDCard" jdbcType="VARCHAR" property="IDCard" />
+    <result column="staffName" jdbcType="VARCHAR" property="staffName" />
+    <result column="formerName" jdbcType="VARCHAR" property="formerName" />
+    <result column="gender" jdbcType="VARCHAR" property="gender" />
+    <result column="birthday" jdbcType="VARCHAR" property="birthday" />
+    <result column="nation" jdbcType="VARCHAR" property="nation" />
+    <result column="politics" jdbcType="VARCHAR" property="politics" />
+    <result column="partyBranch" jdbcType="VARCHAR" property="partyBranch" />
+    <result column="maritalStatus" jdbcType="VARCHAR" property="maritalStatus" />
+    <result column="cellphone" jdbcType="VARCHAR" property="cellphone" />
+    <result column="phone" jdbcType="VARCHAR" property="phone" />
+    <result column="email" jdbcType="VARCHAR" property="email" />
+    <result column="contactPerson" jdbcType="VARCHAR" property="contactPerson" />
+    <result column="contactPersonPhone" jdbcType="VARCHAR" property="contactPersonPhone" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="education" jdbcType="VARCHAR" property="education" />
+    <result column="graduateDate" jdbcType="VARCHAR" property="graduateDate" />
+    <result column="graduateSchool" jdbcType="VARCHAR" property="graduateSchool" />
+    <result column="graduateCertificateNo" jdbcType="VARCHAR" property="graduateCertificateNo" />
+    <result column="departmentOfSchool" jdbcType="VARCHAR" property="departmentOfSchool" />
+    <result column="aidCertificateNo" jdbcType="INTEGER" property="aidCertificateNo" />
+    <result column="isSpecwork" jdbcType="INTEGER" property="isSpecwork" />
+    <result column="specwork" jdbcType="VARCHAR" property="specwork" />
+    <result column="specworkYear" jdbcType="INTEGER" property="specworkYear" />
+    <result column="specworkStartDate" jdbcType="VARCHAR" property="specworkStartDate" />
+    <result column="remainDays" jdbcType="INTEGER" property="remainDays" />
+    <result column="nativePlace" jdbcType="VARCHAR" property="nativePlace" />
+    <result column="householdAddress" jdbcType="VARCHAR" property="householdAddress" />
+    <result column="householdKeptplace" jdbcType="VARCHAR" property="householdKeptplace" />
+    <result column="householdRollInDate" jdbcType="VARCHAR" property="householdRollInDate" />
+    <result column="householdRollOutDate" jdbcType="VARCHAR" property="householdRollOutDate" />
+    <result column="recordRollInDate" jdbcType="VARCHAR" property="recordRollInDate" />
+    <result column="recordKeptplace" jdbcType="VARCHAR" property="recordKeptplace" />
+    <result column="recordRollOutDate" jdbcType="VARCHAR" property="recordRollOutDate" />
+    <result column="workTime" jdbcType="VARCHAR" property="workTime" />
+    <result column="partyTime" jdbcType="VARCHAR" property="partyTime" />
+    <result column="healthState" jdbcType="VARCHAR" property="healthState" />
+    <result column="isRemind" jdbcType="INTEGER" property="isRemind" />
+    <result column="zipCoad" jdbcType="VARCHAR" property="zipCoad" />
+    <result column="highestDegree" jdbcType="VARCHAR" property="highestDegree" />
+    <result column="highestTitle" jdbcType="VARCHAR" property="highestTitle" />
+    <result column="disabledMan" jdbcType="VARCHAR" property="disabledMan" />
+    <result column="disableGrad" jdbcType="VARCHAR" property="disableGrad" />
+    <result column="state" jdbcType="INTEGER" property="state" />
+    <result column="createUser" jdbcType="VARCHAR" property="createUser" />
+    <result column="createTime" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="updateUser" jdbcType="VARCHAR" property="updateUser" />
+    <result column="updateTime" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="recordTime" jdbcType="VARCHAR" property="recordTime" />
+    <result column="retirementState" jdbcType="VARCHAR" property="retirementState" />
+    <result column="retirementBackState" jdbcType="VARCHAR" property="retirementBackState" />
+    <result column="retirementName" jdbcType="VARCHAR" property="retirementName" />
+    <result column="hukou" jdbcType="VARCHAR" property="hukou" />
+  </resultMap>
+</mapper>

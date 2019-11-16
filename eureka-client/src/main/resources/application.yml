@@ -1,0 +1,117 @@
+server:
+  port: 8762
+  undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    io-threads: 4
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    worker-threads: 20
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+    max-http-post-size: 0
+spring:
+  jackson:
+    default-property-inclusion: non_null
+  application:
+    name: API
+    #jdbc配置
+  datasource:
+#    url: jdbc:mysql://172.16.0.7:3306/hrd_20190709?characterEncoding=UTF-8
+    url: jdbc:mysql://172.16.0.7:3306/newhrd?characterEncoding=UTF-8
+    username: root
+    password: 123456
+    type: com.alibaba.druid.pool.DruidDataSource
+    dbcp2:
+      #连接池的配置信息
+      initialSize: 10
+      minIdle: 10
+      timeBetweenEvictionRunsMillis: 60000
+      minEvictableIdleTimeMillis: 300000
+      validationQuery: SELECT 1 FROM DUAL
+      testWhileIdle: true
+      testOnBorrow: false
+      testOnReturn: false
+      poolPreparedStatements: true
+      max-wait-millis: 60000
+#    druid:
+#      initial-size: 5
+#      min-idle: 5
+#      max-active: 30
+#      ######Druid监控配置######
+#      web-stat-filter:
+#        enabled: true
+#        #哪些资源配置监控：主要只静态资源和监控地址本身
+#        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+#      stat-view-servlet:
+#        #IP 白名单
+#        allow: 127.0.0.1
+#        #IP 黑名单
+#        deny: 192.168.0.101
+#        #监控地址,默认 /druid/*
+#        url-pattern: /druid/*
+#        login-username: druid
+#        login-password: druid123123
+
+  # 连接池配置
+  jpa:
+    hibernate:
+      ddl-auto: update
+  zipkin:
+    base-url: http://127.0.0.1:9411/  # zipkin服务器的地址
+    # 关闭服务发现，否则Spring Cloud会把zipkin的url当做服务名称
+    discoveryClientEnabled: false
+    sender:
+      type: web  # 设置使用http的方式传输数据
+    sleuth:
+      sampler:
+        probability: 1  # 设置抽样采集率为100%，默认为0.1，即10%
+
+eureka:
+  client:
+    healthcheck:
+      enabled: true
+    serviceUrl:
+      defaultZone: http://localhost:8761/eureka/,http://localhost:8760/eureka/,http://localhost:8769/eureka/
+
+#服务健康
+#management:
+  #显示所有路径
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"
+#  endpoint:
+#    health:
+#      show-details: always
+#    mappings:
+#      enabled: true
+
+mybatis:
+  config-location: classpath:mybatis/mybatis-config.xml
+  mapper-locations: classpath:mybatis/mapper/*.xml
+  type-aliases-package: com.example.eurekaclient.bean
+
+
+#日志
+logging:
+  file: /home/microServiceLog/log.txt
+  level:
+    com.example.eurekaclient.dao:
+      error
+debug: true
+
+mapper:
+  identity: MYSQL
+#  normal：原值
+#  camelhump：驼峰转下划线
+#  uppercase：转换为大写
+#  lowercase：转换为小写
+#  camelhumpAndUppercase：驼峰转下划线大写形式
+#  camelhumpAndLowercase：驼峰转下划线小写形式
+  style: normal
+  safe-delete: true
+  safe-update: true
+  enum-as-simple-type: true
+  not-empty: false

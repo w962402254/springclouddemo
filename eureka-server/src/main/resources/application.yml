@@ -1,0 +1,125 @@
+#server:
+#  port: 8761
+#
+#eureka:
+#  instance:
+#    hostname: 123
+#    lease-renewal-interval-in-seconds: 10
+    #服务失效时间，Eureka多长时间没收到服务的renew操作，就剔除该服务，默认90秒
+#    lease-expiration-duration-in-seconds: 15
+#    status-page-url-path: /info
+#    health-check-url-path: /health
+#  client:
+    # 是否注册到eureka（eureka本身是不需要再注册到自己的）
+    # 是否从eureka获取注册信息
+#    serviceUrl:
+      # eureka服务器的地址（注意：地址最后面的 /eureka/ 这个是固定值）
+#      defaultZone: http://eureka-server:8760/eureka/
+    # 开启健康检查（依赖spring-boot-starter-actuator）
+#    healthcheck:
+#      enabled: true
+#    fetchRegistry: false
+#    register-with-eureka: false
+#  server:
+    #eureka server清理无效节点的时间间隔，默认60000毫秒，即60秒
+#    eviction-interval-timer-in-ms: 20000
+    # 自我保护模式（缺省为打开）
+#    enable-self-preservation: true
+
+# 心跳时间，即服务续约间隔时间（缺省为30s）
+#eureka.instance.lease-renewal-interval-in-seconds: 5
+# 发呆时间，即服务续约到期时间（缺省为90s）
+#eureka.instance.lease-expiration-duration-in-seconds: 10
+
+#spring:
+#  application:
+#    name: eurka-server
+
+
+
+server:
+  port: 8760
+  # 下面是配置undertow作为服务器的参数
+  undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    io-threads: 4
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    worker-threads: 20
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+    max-http-post-size: 0
+
+spring:
+  application:
+    name: eureka-server
+  profiles: eureka-server0
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://eureka-server1:8761/eureka/,http://eureka-server2:8769/eureka/
+    fetchRegistry: true
+    register-with-eureka: true
+  instance:
+      hostname: eureka-server0
+
+---
+
+server:
+  port: 8761
+  undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    io-threads: 4
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    worker-threads: 20
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+
+spring:
+  application:
+    name: eureka-server
+  profiles: eureka-server1
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server0:8760/eureka/,http://eureka-server2:8769/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: eureka-server1
+
+---
+
+server:
+  port: 8769
+  undertow:
+    # 设置IO线程数, 它主要执行非阻塞的任务,它们会负责多个连接, 默认设置每个CPU核心一个线程
+    io-threads: 4
+    # 阻塞任务线程池, 当执行类似servlet请求阻塞操作, undertow会从这个线程池中取得线程,它的值设置取决于系统的负载
+    worker-threads: 20
+    # 以下的配置会影响buffer,这些buffer会用于服务器连接的IO操作,有点类似netty的池化内存管理
+    # 每块buffer的空间大小,越小的空间被利用越充分
+    buffer-size: 1024
+    # 是否分配的直接内存
+    direct-buffers: true
+
+spring:
+  application:
+    name: eureka-server
+  profiles: eureka-server2
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka-server0:8760/eureka/,http://eureka-server1:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    hostname: eureka-server2
