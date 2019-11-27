@@ -35,24 +35,24 @@ spring:
       testOnReturn: false
       poolPreparedStatements: true
       max-wait-millis: 60000
-#    druid:
-#      initial-size: 5
-#      min-idle: 5
-#      max-active: 30
-#      ######Druid监控配置######
-#      web-stat-filter:
-#        enabled: true
-#        #哪些资源配置监控：主要只静态资源和监控地址本身
-#        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
-#      stat-view-servlet:
-#        #IP 白名单
-#        allow: 127.0.0.1
-#        #IP 黑名单
-#        deny: 192.168.0.101
-#        #监控地址,默认 /druid/*
-#        url-pattern: /druid/*
-#        login-username: druid
-#        login-password: druid123123
+    druid:
+      initial-size: 5
+      min-idle: 5
+      max-active: 30
+      ######Druid监控配置######
+      web-stat-filter:
+        enabled: true
+        #哪些资源配置监控：主要只静态资源和监控地址本身
+        exclusions: '*.js,*.gif,*.jpg,*.png,*.css,*.ico,/druid/*'
+      stat-view-servlet:
+        #IP 白名单
+        allow: 127.0.0.1
+        #IP 黑名单
+        deny: 192.168.0.101
+        #监控地址,默认 /druid/*
+        url-pattern: /druid/*
+        login-username: druid
+        login-password: druid123123
 
   # 连接池配置
   jpa:
